@@ -1,6 +1,6 @@
 <%-- 
-    Document   : A
-    Created on : 2023年12月15日, 下午4:28:34
+    Document   : B
+    Created on : 2023年12月15日, 下午4:33:03
     Author     : student
 --%>
 
@@ -9,12 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>修改 JSP Title 標題</title>
+        <title>JSP Page</title>
     </head>
     <body>
-        <h1> Page A </h1>
-        <a href="B.jsp">Page_B</a>
-        
-        
+        <h1>Page B</h1>
+        <a href="C.jsp">Page C</a>
+        <a href="D.jsp">Page D</a>
     </body>
 </html>
