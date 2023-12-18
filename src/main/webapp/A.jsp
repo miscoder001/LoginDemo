@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>修改 JSP Title 標題</title>
     </head>
     <body>
         <h1> Page A </h1>
