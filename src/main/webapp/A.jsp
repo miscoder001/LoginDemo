@@ -14,14 +14,12 @@
     </head>
         <body>
             <h1> 執行前請記得將  mariadb-java-client-x.x.x.jar 放到 tomcat/lib 目錄下 </h1>
-    <%
-        
+    <%        
         // 示範 資料庫連線 六大步驟
         // 所有跟資料庫有關的 定義都在  java.sql*
         Connection con;
         Statement stmt;
-        ResultSet rs;
-        
+        ResultSet rs;        
         // 1. 載入資料庫驅動
         try{
             Class.forName("org.mariadb.jdbc.Driver");
@@ -47,21 +45,34 @@
            rs.last(); //最後一筆
            */
         // 5. 顯示資料集
-        out.print("<hr/>");
+        out.print("<table>");
         while( rs.next() ) {
-            out.print("姓名: " +  rs.getString("name") +"<br>");
-            out.print("email: " + rs.getString(3));
-            out.print("<hr/>");
+            out.print("<tr>");
+                out.print("<td>");
+                out.print("姓名:");
+                out.print("</td>");
+                out.print("<td>");
+                out.print(rs.getString("name") );
+                out.print("</td>");
+
+                out.print("<td>");
+                out.print("email"); 
+                out.print("</td>");
+                out.print("<td>");
+                out.print(rs.getString(3));
+                out.print("</td>");
+            out.print("</tr>");            
         }
+        out.print("</table>");
         // 6. 結束
+        
         }catch(SQLException e) {
                 out.print("連線失敗:" + e.getMessage() + "<br>");
         }
 
     %> 
         <h1> Page A </h1>
-        <a href="B.jsp">Page_B</a>
-        
-        
+        <a href="B.jsp">Page_B</a>        
+       
     </body>
 </html>
