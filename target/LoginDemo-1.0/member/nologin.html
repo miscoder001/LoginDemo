@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Html.html to edit this template
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <h1> 您尚未登入本公司會員  </h1>
+        <h3> 三秒後會將您導向登入頁面 請稍後 </h3>
+        
+        <script>
+          // alert('javascript 版的 彈出視窗')  
+          function toLogin() {
+              //轉跳到 login.jsp
+              location.href="http://localhost:8080/LoginDemo/login.jsp";
+          }
+          setTimeout( toLogin ,3000)
+        </script>
+    </body>
+</html>
