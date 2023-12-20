@@ -17,24 +17,16 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CheckLogin extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
         response.setContentType("text/html;charset=UTF-8");
         //  取出 使用者表單 帳密  與資料庫比對
         java.sql.Connection con;
         java.sql.Statement stmt;
         java.sql.ResultSet rs;       
         String username, passwd, sql;
-        
+        boolean loginResult = false
+                ;
         username = request.getParameter("username");
         passwd = request.getParameter("passwd");
         sql = "SELECT * FROM user WHERE NAME='" + username + "' AND passwd='" + passwd + "';";
@@ -46,18 +38,19 @@ public class CheckLogin extends HttpServlet {
         // 2. 建立連線        
         try {
         
-            con = DriverManager.getConnection("jdbc:mariadb://127.0.0.1/webdb", "root", "12345");                
+            con = java.sql.DriverManager.getConnection("jdbc:mariadb://127.0.0.1/webdb", "root", "12345");                
             
         // 3. 建立SQL 對應的查詢物件
            stmt = con.createStatement();
-        // 4. 執行查詢後取得結果
-          
+        // 4. 執行查詢後取得結果          
            rs = stmt.executeQuery(sql);
-           
+           if( rs.next() ) {
+               loginResult = true;
+           }
         // 6. 結束
         
-        }catch(SQLException e) {
-                out.print("連線失敗:" + e.getMessage() + "<br>");
+        }catch(java.sql.SQLException e) {
+                // out.print("連線失敗:" + e.getMessage() + "<br>");
         }
         //
         try (PrintWriter out = response.getWriter()) {
@@ -65,10 +58,17 @@ public class CheckLogin extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CheckLogin</title>");            
+            out.println("<title>CheckLogin</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CheckLogin at " + request.getContextPath() + "</h1>");
+            out.println("<h1>CheckLogin 會員登入結果</h1>");
+            out.println("<h3>sql 語法: " + sql + "</h3>");
+            out.println("<hr>");
+            if( loginResult ) {
+                out.print("<h3> 您已登入成功</h3>");
+            } else {
+                out.print("<h3> 您登入失敗</h3>");
+            }
             out.println("</body>");
             out.println("</html>");
         }
