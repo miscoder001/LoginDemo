@@ -30,14 +30,15 @@ public class CheckLogin2 extends HttpServlet {
         username = request.getParameter("username");
         passwd = request.getParameter("passwd");
         sql = "SELECT * FROM user WHERE NAME='" + username + "' AND passwd='" + passwd + "';";
-        // String message = "這是 LoginCheck2給的資料";
-        String message = "hello from CheckLogin2";
+        String message = "這是 LoginCheck2給的資料";
+        // String message = "hello from CheckLogin2";
         try {
             stmt = dbcon.createStatement();
             rs = stmt.executeQuery(sql);
             if( rs.next() ) {
                 // 在程式內 發送 request 給其他頁面   request 派發
-                RequestDispatcher disp= request.getRequestDispatcher("paramPass.jsp?msg="+message);
+                System.out.println(" 編碼後內容: " + java.net.URLEncoder.encode(message , "UTF-8"));
+                RequestDispatcher disp= request.getRequestDispatcher("paramPass.jsp?msg="+ java.net.URLEncoder.encode(message , "UTF-8"));
                 disp.forward(request, response);
                 // disp.include(request, response);
             } else {
