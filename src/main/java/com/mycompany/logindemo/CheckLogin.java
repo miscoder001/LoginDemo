@@ -29,8 +29,39 @@ public class CheckLogin extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //  取出 使用者表單 帳密  與資料庫比對
+        java.sql.Connection con;
+        java.sql.Statement stmt;
+        java.sql.ResultSet rs;       
+        String username, passwd, sql;
+        
+        username = request.getParameter("username");
+        passwd = request.getParameter("passwd");
+        sql = "SELECT * FROM user WHERE NAME='" + username + "' AND passwd='" + passwd + "';";
+        // 1. 載入資料庫驅動
+        try{
+            Class.forName("org.mariadb.jdbc.Driver");            
+        }catch(Exception e ) {            
+        }
+        // 2. 建立連線        
+        try {
+        
+            con = DriverManager.getConnection("jdbc:mariadb://127.0.0.1/webdb", "root", "12345");                
+            
+        // 3. 建立SQL 對應的查詢物件
+           stmt = con.createStatement();
+        // 4. 執行查詢後取得結果
+          
+           rs = stmt.executeQuery(sql);
+           
+        // 6. 結束
+        
+        }catch(SQLException e) {
+                out.print("連線失敗:" + e.getMessage() + "<br>");
+        }
+        //
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
