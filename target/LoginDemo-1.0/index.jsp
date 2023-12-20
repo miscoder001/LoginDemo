@@ -26,5 +26,8 @@
         您現在所在的位置: <%= request.getRequestURI() %>
         <h1>會員登入系統 : session id: <%= session.getId() %>  </h1>
         <a href="/LoginDemo/login.jsp">會員登入</a>
+        
+        <a href="ProductQuery.jsp">模型商品</a>
+        
     </body>
 </html>
