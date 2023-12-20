@@ -8,6 +8,10 @@
         <servlet-name>NewServlet</servlet-name>
         <servlet-class>com.mycompany.logindemo.NewServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CheckLogin</servlet-name>
+        <servlet-class>com.mycompany.logindemo.CheckLogin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Page1</servlet-name>
         <url-pattern>/Page1</url-pattern>
@@ -15,6 +19,10 @@
     <servlet-mapping>
         <servlet-name>NewServlet</servlet-name>
         <url-pattern>/K1</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckLogin</servlet-name>
+        <url-pattern>/CheckLogin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
