@@ -12,9 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>會員登入頁面</h1>
         您現在所在的位置: <%= request.getRequestURI() %>
-        <form action="CheckLogin">
+        <form method="post" action="CheckLogin2">
             帳號:<input type="text" name="username" value="" /><br/>
             密碼:<input type="password" name="passwd" value="" /><br/>
             <input type="submit" value="登入" />
