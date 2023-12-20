@@ -12,8 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>我想知道 你到底從哪邊過來的? ( Page B or Page C ??)</h1>
-        答案：<%= request.getHeader("Referer") %>
-                
+        <h2> 提示: <%= request.getAttribute("errmsg") %>    </h2>
+        <h2> 提示: <%= request.getAttribute("msg2") %>    </h2>
     </body>
 </html>

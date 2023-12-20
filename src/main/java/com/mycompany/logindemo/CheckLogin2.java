@@ -37,12 +37,15 @@ public class CheckLogin2 extends HttpServlet {
             rs = stmt.executeQuery(sql);
             if( rs.next() ) {
                 // 在程式內 發送 request 給其他頁面   request 派發
-                System.out.println(" 編碼後內容: " + java.net.URLEncoder.encode(message , "UTF-8"));
+                System.out.println(" 編碼後內容: " + java.net.URLEncoder.encode(message , "UTF-8"));                
                 RequestDispatcher disp= request.getRequestDispatcher("paramPass.jsp?msg="+ java.net.URLEncoder.encode(message , "UTF-8"));
                 disp.forward(request, response);
                 // disp.include(request, response);
             } else {
-                // D.jsp
+                // 透過 request 夾帶資料送交給下一個頁面 進行處理
+                System.out.println("透過 request 夾參數 setAttribute");
+                request.setAttribute("errmsg", "請確認您的帳號密碼正確 或請洽本站管理者: admin@abc.com.tw");
+                request.setAttribute("msg2", "或請於上班時間聯絡 04-3377123 分機 123");
                 request.getRequestDispatcher("D.jsp").forward(request, response);
                 //RequestDispatcher disp= request.getRequestDispatcher("D.jsp");
                 //disp.include(request, response);

@@ -14,5 +14,7 @@
     <body>
         <h1>看到這一頁 表示你登入成功</h1>
         這裡 會顯示 LoginCheck2 傳過來的參數:   <%= request.getParameter("msg") %>
+        <hr/>
+                
     </body>
 </html>
