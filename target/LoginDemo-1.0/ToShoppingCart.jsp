@@ -22,6 +22,9 @@
        String pid = null, pname = null;
     %>
     <%
+       // 檢查使用者現在的狀態
+       String user = (String) session.getAttribute("username");
+       
        // HttpSession usession = request.getSession();
        // 購物車的容器用 (Map 存放)   Key( 產品代號 , --> 模型資訊( 品名 , 數量  --> java class 來存放)
        shoppingCart = (ArrayList) session.getAttribute("cart");
@@ -32,19 +35,32 @@
             shoppingCart = new ArrayList();
             session.setAttribute("cart", shoppingCart); // 讓 shoppingCart 可以隨著瀏覽器 活著 就活著
         } 
+        // 製作 CartItem 後放入購物車  35~43
         pid = request.getParameter("pid");
         pname = request.getParameter("pname") ;
-        CartItem citem = new CartItem();
-        citem.productCode = pid;
-        citem.productName = pname;
-        citem.qty = 1;
-        
-        shoppingCart.add(citem);
+        // 檢查 是否已經放在購物車內 
+        if( shoppingCart.size() == 0 ) {
+            CartItem citem = new CartItem(pid,pname,1);            
+            shoppingCart.add(citem);
+        } else {
+            for(CartItem cti : shoppingCart) {
+                if( cti.getProductCode().equals(pid)) {
+                    cti.setQty( cti.getQty()+1 );
+                } else {
+                    CartItem citem = new CartItem(pid,pname,1);      
+                    shoppingCart.add(citem);
+                }
+            }
+        }
+        //
     %>
     
     <body>
         <h1>購物項目</h1>
         <h2> 您目前有  <%= shoppingCart.size() %>  項產品在購物車內</h2>
+        <% if( user == null ) {  %>
+            <h3 style="color: #red"> 提醒您 你目前尚未登入 </h3>
+        <% } %>
         <hr/>
         您剛點選的產品是: <%=  pid %>  <br/>
         品名: <%= pname %>

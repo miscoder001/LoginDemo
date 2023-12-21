@@ -48,7 +48,13 @@
            String shoppingUrl = "#";
        %>
        <%
-          int plType = Integer.valueOf( request.getParameter("pl") );  // 
+           String v = request.getParameter("pl") ;
+          int plType = 0;
+          if( v == null ) {
+            plType = 1;
+           } else {
+            plType = Integer.parseInt(v);
+           }
           // 請注意 跨資料庫查詢時要加上  Database.Table 格式
           String sql = "Select * from classicmodels.products where productLine = '";          
           
