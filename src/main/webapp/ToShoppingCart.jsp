@@ -4,6 +4,8 @@
     Author     : student
 --%>
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.mycompany.logindemo.CartItem"%>
 <%@page import="com.mycompany.logindemo.ProductModel"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
@@ -14,21 +16,38 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
-    <%
-       HttpSession usession = request.getSession();
-       // 購物車的容器用 (Map 存放)   Key( 產品代號 , --> 模型資訊( 品名 , 數量  --> java class 來存放)
-       Map<String,ProductModel> shoppingCart = new HashMap<>();
-       // 一開始就會有 購物車??????
-       if( session.getAttribute("cart") == null ) {
-            //跟 sesssion 要求購物車物件  如果沒有 ...
-        } else {
-            // 使用
-        }
+    <%! 
+       // 購物車
+       ArrayList<CartItem> shoppingCart = null;
+       String pid = null, pname = null;
     %>
+    <%
+       // HttpSession usession = request.getSession();
+       // 購物車的容器用 (Map 存放)   Key( 產品代號 , --> 模型資訊( 品名 , 數量  --> java class 來存放)
+       shoppingCart = (ArrayList) session.getAttribute("cart");
+               
+       // 一開始就會有 購物車??????
+       if( shoppingCart == null ) {
+            //跟 sesssion 要求購物車物件  如果沒有 ...
+            shoppingCart = new ArrayList();
+            session.setAttribute("cart", shoppingCart); // 讓 shoppingCart 可以隨著瀏覽器 活著 就活著
+        } 
+        pid = request.getParameter("pid");
+        pname = request.getParameter("pname") ;
+        CartItem citem = new CartItem();
+        citem.productCode = pid;
+        citem.productName = pname;
+        citem.qty = 1;
+        
+        shoppingCart.add(citem);
+    %>
+    
     <body>
         <h1>購物項目</h1>
-        您剛點選的產品是: <%= request.getParameter("pid") %>  <br/>
-        品名: <%= request.getParameter("pname") %>
+        <h2> 您目前有  <%= shoppingCart.size() %>  項產品在購物車內</h2>
+        <hr/>
+        您剛點選的產品是: <%=  pid %>  <br/>
+        品名: <%= pname %>
         // 取出 session 
         // 將收到的 產品資訊(產品代號,品名, 數量) 
         // 放入購物車(容器, 可存放多筆產品資料)
