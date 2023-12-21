@@ -15,7 +15,7 @@
         <title>JSP Page</title>
     </head>
     <%
-       HttpSession session = request.getSession();
+       HttpSession usession = request.getSession();
        // 購物車的容器用 (Map 存放)   Key( 產品代號 , --> 模型資訊( 品名 , 數量  --> java class 來存放)
        Map<String,ProductModel> shoppingCart = new HashMap<>();
        // 一開始就會有 購物車??????

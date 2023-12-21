@@ -14,7 +14,7 @@ public class DBConGenerator {
 
     String username="root";
     String passwd="12345";
-    String cstring = "jdbc:mariadb://127.0.0.1/webdb";
+    String cstring = "jdbc:mariadb://127.0.0.1/classicmodels";
     
     public DBConGenerator() {
         try{
