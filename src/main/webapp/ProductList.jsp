@@ -20,7 +20,18 @@
             table {
               border-spacing: 15px;
             }
-            </style>
+            #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: #ddd;}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #04AA6D;
+  color: white;
+}
+        </style>
     </head>
     <%--  
             1. 連結資料庫
@@ -34,6 +45,7 @@
            java.sql.ResultSet rs = null;
            Statement stmt = null;
            String productLine = null;
+           String shoppingUrl = "#";
        %>
        <%
           int plType = Integer.valueOf( request.getParameter("pl") );  // 
@@ -66,17 +78,19 @@
         <h1>商品列表</h1>
         <h3> 查詢類型: <%= productLine %> </h3>
         <h3>語法: <%= sql %> </h3>
-        <table style="width:100%">     
+        <table style="width:100%" id="customers">     
             <tr>
               <th>產品代號</th>
               <th>產品名稱</th> 
               <th>模型比例</th>
               <th>庫存數量</th>
               <th>售價</th>
+              <th>購物</th>
             </tr>
        <%--   rs.next 迴圈開始 --%> 
        <% try {
             while(rs.next() ) {
+                shoppingUrl = "ToShoppingCart.jsp?pid="+rs.getString("productCode") + "&pname=" + rs.getString("productName");
        %>
             <tr>
               <td><%= rs.getString("productCode") %></td>
@@ -84,7 +98,7 @@
               <td><%= rs.getString("productScale") %></td>
               <td><%= rs.getInt("quantityInStock") %></td>
               <td><%= rs.getBigDecimal("MSRP").toString() %></td>
-              
+              <td><a href="<%= shoppingUrl %>">加入購物</a> </td>
             </tr>
         <% }
             // 釋放所有資源
