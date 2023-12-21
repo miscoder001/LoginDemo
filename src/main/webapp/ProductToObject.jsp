@@ -48,35 +48,18 @@
            Statement stmt = null;
            String productLine = null;
            String shoppingUrl = "#";
+           ArrayList<ProductModel> rows = new ArrayList();            
        %>
        <%
-
           String sql = "Select * from classicmodels.products where productLine = '";          
           DBConGenerator dbg = new DBConGenerator();
           con = dbg.getConnction();
           stmt = con.createStatement();
           //
           try {
-            rs = stmt.executeQuery("select productCode,productName,productScale,quantityInStock from classicmodels.products");
-           }catch( Exception e) { }
-       %>
-    <body>
-        <h1>商品列表</h1>
-        <h3> 查詢類型: <%= productLine %> </h3>
-        <h3>語法: <%= sql %> </h3>
-        <table style="width:100%" id="customers">     
-            <tr>
-              <th>產品代號</th>
-              <th>產品名稱</th> 
-              <th>模型比例</th>
-              <th>庫存數量</th>
-              <th>售價</th>
-              <th>購物</th>
-            </tr>
-       <%--   rs.next 迴圈開始 --%> 
-       <% 
-            ArrayList rows = new ArrayList();
-            try {
+            rs = stmt.executeQuery("select productCode,productName,productScale,quantityInStock from classicmodels.products");           
+            
+            // 將每一筆在資料表內的資料轉換成 Java Object,  這行為通稱 ORM 
             while(rs.next() ) {
                 ProductModel pm1 = new ProductModel();
                 pm1.ProductCode = rs.getString("productCode");
@@ -92,7 +75,29 @@
             con.close();            
             }catch(Exception e) {            
             }
-        %>        
+       %>
+    <body>
+        <h1>商品列表</h1>
+        <h3> 查詢類型: <%= productLine %> </h3>        
+        <table style="width:80%" id="customers">     
+            <tr>
+              <th>產品代號</th>
+              <th>產品名稱</th> 
+              <th>模型比例</th>
+              <th>庫存數量</th>              
+              <th>購物</th>
+            </tr>
+                  
+            <%  for(ProductModel pm : rows ) {%>   
+            <tr>                
+              <td><%= pm.ProductCode %></td>
+              <td><%= pm.ProductName %></td>
+              <td><%= pm.ProductScale %></td>
+              <td><%= pm.qty %></td>
+              
+              <td><a href="<%= pm.ProductCode %>">加入購物</a> </td>
+            </tr>
+            <% } %>
     </table>
     目前共有 <%= rows.size() %> 筆模型資料
     </body>
