@@ -20,6 +20,7 @@
        // 購物車
        ArrayList<CartItem> shoppingCart = null;
        String pid = null, pname = null;
+       boolean isDuplicate = false;
     %>
     <%
        // 檢查使用者現在的狀態
@@ -46,12 +47,16 @@
             for(CartItem cti : shoppingCart) {
                 if( cti.getProductCode().equals(pid)) {
                     cti.setQty( cti.getQty()+1 );
-                } else {
-                    CartItem citem = new CartItem(pid,pname,1);      
-                    shoppingCart.add(citem);
-                }
+                    isDuplicate = true;
+                } 
+            }
+            if( ! isDuplicate) {
+                CartItem citem = new CartItem(pid,pname,1);            
+                shoppingCart.add(citem);
+                isDuplicate = false;
             }
         }
+        
         //
     %>
     
