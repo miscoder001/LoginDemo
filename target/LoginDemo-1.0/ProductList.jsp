@@ -91,6 +91,7 @@
        <% try {
             while(rs.next() ) {
                 shoppingUrl = "ToShoppingCart.jsp?pid="+rs.getString("productCode") + "&pname=" + rs.getString("productName");
+                
        %>
             <tr>
               <td><%= rs.getString("productCode") %></td>
