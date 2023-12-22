@@ -28,6 +28,16 @@
             }
 
             tr:hover {background-color:#f5ff5f;}
+            
+            input[type=button], input[type=submit], input[type=reset] {
+              background-color: #00FFFF;
+              border: none;
+              color: white;
+              padding: 16px 32px;
+              text-decoration: none;
+              margin: 4px 2px;
+              cursor: pointer;
+            }
         </style>
     </head>
     <%
@@ -53,9 +63,16 @@
                   <td><%= cpm.getQty() %></td>
                 </tr>
             <% } %>
-           </table>
+           </table>           
+           <button onclick="CheckItOut()">結帳去</button>
+           <button onclick="location.href='CheckOut.jsp'">結帳去2</button>
         <% } else { %>
             <h2> 您尚未有任何商品放入購物車 </h2>
         <% } %>
-    </body>
+    </body>    
+    <script>
+        function CheckItOut() {
+            location.href='CheckOut.jsp'
+        }
+    </script>
 </html>

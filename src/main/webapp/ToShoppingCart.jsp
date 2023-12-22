@@ -79,6 +79,6 @@
         // 放入購物車(容器, 可存放多筆產品資料)
         // 購物車的結構要怎樣放上述的資料  一筆資料要?  
         // 收到重複的 pid 怎處理?
-        
+        <button onclick="location.href='ProductList.jsp'">回商品列表</button>
     </body>
 </html>
