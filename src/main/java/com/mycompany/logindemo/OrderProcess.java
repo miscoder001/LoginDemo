@@ -48,9 +48,12 @@ public class OrderProcess extends HttpServlet {
                 System.out.println("SQL:  " + sql);
                 stmt.execute(sql);
             }
-        
-        }catch(Exception e) {
-                
+            // 清除購物車
+            cart.clear();
+            
+        }catch(SQLException e) {
+           // inser into 發生異常
+           System.err.print("新增發生錯誤" + e.getMessage());
         }
         // 處理後續作業
           // 1 成功寫入資料表後  清除 購物車

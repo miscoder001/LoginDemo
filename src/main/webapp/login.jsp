@@ -11,9 +11,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    <%
+       // 將 Referer 記錄起來(放到 session ) 供 CheckLogin2 使用 
+       session.setAttribute("from", request.getHeader("Referer"));
+    %>
     <body>
-        <h1>會員登入頁面</h1>
-        您現在所在的位置: <%= request.getRequestURI() %>
+        <h3>從這個網址過來的: <%= request.getHeader("Referer") %> </h3>
+        <h1>會員登入頁面</h1> 
+        
         <form method="get" action="CheckLogin2">
             帳號:<input type="text" name="username" value="" /><br/>
             密碼:<input type="password" name="passwd" value="" /><br/>
@@ -22,4 +27,5 @@
            
         </form>        
     </body>
+   
 </html>

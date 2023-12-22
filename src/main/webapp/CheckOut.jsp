@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>ooxx電商</title>
         <style>
             input[type=text], select {
             width: 100%;
@@ -105,45 +105,56 @@
 	background: white;
 }
         </style>
-    </head>
+    </head>    
+    <%
+        String member = null;         
+         if( session.getAttribute("username") == null ) {
+            member = "尚未登入";
+            // UI 加上提示  3秒後轉送到登入
+            response.sendRedirect("login.jsp");
+        } else {
+            member = session.getAttribute("username").toString();
+        }
+    %>
     <body>
+        <h5> 會員:  <%= member %> </h5>
         <h1>結帳</h1>
-        <div>
-  <form action="/LoginDemo/OrderProcess">
-    <label for="recipient">收件人</label>
-    <input type="text" id="recipient" name="recipient" placeholder="Your name..">
-
-    <label for="address">地址</label>
-    <input type="text" id="address" name="address" placeholder="宅配請輸入您的收貨地址">
-    <h5>付款方式</h5>
-    <label class="container">ATM轉帳
-        <input type="radio" checked="checked" name="payment" value="a">
-        <span class="checkmark"></span>
-      </label>
-      <label class="container">貨到付款
-        <input type="radio" name="payment" value="b">
-        <span class="checkmark"></span>
-      </label>
-      <label class="container">超商繳費
-        <input type="radio" name="payment" value="c">
-        <span class="checkmark"></span>
-      </label>
-      <label class="container">線上刷卡
-        <input type="radio" name="payment" value="d">
-        <span class="checkmark"></span>
-      </label>
-      
-    <label for="shipping">出貨方式</label>
-    <select id="shipping" name="shipping">
-      <option value="post">宅配(貨到付款)</option>
-      <option value="family">全家</option>
-      <option value="711">7-11</option>
-    </select>
-  
-    <input type="submit" value="送出訂單">
-  </form>
-</div>
-
         
+            <div>
+            <form action="/LoginDemo/OrderProcess">
+              <label for="recipient">收件人</label>
+              <input type="text" id="recipient" name="recipient" placeholder="Your name..">
+
+              <label for="address">地址</label>
+              <input type="text" id="address" name="address" placeholder="宅配請輸入您的收貨地址">
+              <h5>付款方式</h5>
+              <label class="container">ATM轉帳
+                  <input type="radio" checked="checked" name="payment" value="a">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">貨到付款
+                  <input type="radio" name="payment" value="b">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">超商繳費
+                  <input type="radio" name="payment" value="c">
+                  <span class="checkmark"></span>
+                </label>
+                <label class="container">線上刷卡
+                  <input type="radio" name="payment" value="d">
+                  <span class="checkmark"></span>
+                </label>
+
+              <label for="shipping">出貨方式</label>
+              <select id="shipping" name="shipping">
+                <option value="post">宅配(貨到付款)</option>
+                <option value="family">全家</option>
+                <option value="711">7-11</option>
+              </select>
+
+              <input type="submit" value="送出訂單">
+            </form>
+        </div>        
     </body>
+    
 </html>
