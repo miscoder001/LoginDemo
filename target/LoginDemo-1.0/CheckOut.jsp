@@ -109,7 +109,7 @@
     <body>
         <h1>結帳</h1>
         <div>
-  <form action="#">
+  <form action="/LoginDemo/OrderProcess">
     <label for="recipient">收件人</label>
     <input type="text" id="recipient" name="recipient" placeholder="Your name..">
 
