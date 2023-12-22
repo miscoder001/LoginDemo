@@ -51,6 +51,7 @@
                     //有重複 把 CartItem 數量+1  
                     cti.setQty( cti.getQty()+1 );
                     isDuplicate = true;  // 並設定判斷旗號 發現是重複的
+                    break; // 提早離開
                 } 
             }
             // 檢查結果如果沒有重複  則新增

@@ -18,16 +18,12 @@
     
     <body>
         <h5>使用者資訊</h5>
-        瀏覽器版本: <%= request.getHeader("User-Agent")  %> <br>
-        瀏覽器語系: <%= request.getHeader("Accept-Language") %> <br>
-        使用者IP:　<%=  request.getRemoteAddr()  %><br>
-        Tomcat IP:　<%=  request.getLocalAddr()  %><br>
-        您現在所在的位置: index.jsp <br/>
-        您現在所在的位置: <%= request.getRequestURI() %>
+        
         <h1>會員登入系統 : session id: <%= session.getId() %>  </h1>
         <a href="/LoginDemo/login.jsp">會員登入</a>
         
         <a href="ProductQuery.jsp">模型商品</a>
+        <a href="ShoppingCartList.jsp">檢視購物車</a>
         
     </body>
 </html>

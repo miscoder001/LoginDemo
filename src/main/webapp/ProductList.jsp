@@ -81,6 +81,8 @@
            }catch( Exception e) { }
        %>
     <body>
+        <a href="ShoppingCartList.jsp">檢視購物車</a>
+        <a href="#">結帳</a>
         <h1>商品列表</h1>
         <h3> 查詢類型: <%= productLine %> </h3>
         <h3>語法: <%= sql %> </h3>
