@@ -106,10 +106,12 @@
 }
         </style>
     </head>    
-    <%
+    <%       
+        boolean notLogin = false;
         String member = null;         
          if( session.getAttribute("username") == null ) {
-            member = "尚未登入 三秒後你會看到 login ";
+            member = "尚未登入 三秒後你會看到 login ";       
+            notLogin = true;
             // UI 加上提示  3秒後轉送到登入
             // response.sendRedirect("login.jsp");
         } else {
@@ -119,6 +121,7 @@
     <body>
         <h5> 會員:  <%= member %> </h5>
         <div id="loginRemind"></div>
+        <div id="loginRemind2"></div>
         <h1>結帳</h1>
         
             <div>
@@ -156,14 +159,41 @@
               <input type="submit" value="送出訂單">
             </form>
         </div>        
-    </body>
+    </body>    
+    <% if( notLogin ) { %>
     <script>
         // 進行三秒倒數  時間到 將使用者轉走到 login.jsp
-        var countdown=3;
-        setTimeout(gotoLogin, 3000);
-        function gotoLogin() {
-            // 通知資訊 告知使用者 三秒後將轉走
-            location.href='login.jsp';
+        var countdown=5;
+        var countdown2=500;
+        var c1 = window.setInterval(notifyMessage, 1000)
+        var c2 = window.setInterval(notifyMessage2, 2000)
+        function notifyMessage() {            
+            document.getElementById('loginRemind').innerHTML = "系統即將轉送到登入頁面,請稍後" + countdown;
+            
+            if( countdown-- == 0 ) {
+                window.clearInterval(c1)
+                window.clearInterval(c2)
+                location.href = 'login.jsp'
+                
+            }
+            
         }
-    </script>
+        function notifyMessage2() {            
+            document.getElementById('loginRemind2').innerHTML = "不同計時器 " + countdown2;
+            if( countdown2-- == 0 ) {
+                
+            }
+            
+        }
+        // 每一秒鐘 去更新頁面 告知 user 
+        
+                /*
+                setTimeout(gotoLogin, 3000);  // 三秒後 執行一次
+                function gotoLogin() {
+                    // 通知資訊 告知使用者 三秒後將轉走
+                    location.href='login.jsp';
+                }
+            */
+    </script> 
+    <% } %>
 </html>
