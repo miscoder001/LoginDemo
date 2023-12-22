@@ -109,15 +109,16 @@
     <%
         String member = null;         
          if( session.getAttribute("username") == null ) {
-            member = "尚未登入";
+            member = "尚未登入 三秒後你會看到 login ";
             // UI 加上提示  3秒後轉送到登入
-            response.sendRedirect("login.jsp");
+            // response.sendRedirect("login.jsp");
         } else {
             member = session.getAttribute("username").toString();
         }
     %>
     <body>
         <h5> 會員:  <%= member %> </h5>
+        <div id="loginRemind"></div>
         <h1>結帳</h1>
         
             <div>
@@ -156,5 +157,13 @@
             </form>
         </div>        
     </body>
-    
+    <script>
+        // 進行三秒倒數  時間到 將使用者轉走到 login.jsp
+        var countdown=3;
+        setTimeout(gotoLogin, 3000);
+        function gotoLogin() {
+            // 通知資訊 告知使用者 三秒後將轉走
+            location.href='login.jsp';
+        }
+    </script>
 </html>
